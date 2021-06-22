@@ -18,4 +18,4 @@
 ## deleted [pipeline view plugin
 ##restarted jenkins
 
-## open 80 port on ec2
+## open 80 port on ec2 - forgot to change ip address
