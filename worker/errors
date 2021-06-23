@@ -20,3 +20,5 @@
 
 ## open 80 port on ec2 - forgot to change ip address
 ## alterei security group e portas 9418 e 80
+
+## anchecking SrCV
