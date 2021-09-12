@@ -1,5 +1,5 @@
 
-<!-- [<img src="https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiaTJ5dlRhZ0lXUjVnd0tyNWVqRVh4dFQvYlBRM3YreHN4SlpnWTYydVdrN2dseVA0THFFbVMwMDNCNE43TVEwUUxlcU1PVFVsOFBQVlF1NjdnZC9SbzR3PSIsIml2UGFyYW1ldGVyU3BlYyI6ImkydGFBQXF3YkpwRlZCSzciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main">](<LINK>)
- -->
+[![Build Status](http://54.89.145.90:8080/buildStatus/icon?job=instavote%2Fworker-build)](http://54.89.145.90:8080/job/instavote/job/worker-build/)
+
 ### Worker Java App
 ### Testing
