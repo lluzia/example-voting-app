@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+      
+        stage('one') {
+            steps {
+                echo 'Hello Dmitri'
+                sleep 3
+            }
+        }
+        stage('two') {
+            steps {
+                echo 'Hello Carl'
+                sleep 9
+            }
+        }
+        stage('three') {
+            steps {
+                echo 'Hello Franklin'
+                sleep 5
+            }
+        }
+      }
+        
+    post{
+      always{
+        echo 'This pipeline is completed.'
+      }
+    }
+}
+
