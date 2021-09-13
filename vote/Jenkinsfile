@@ -1,40 +1,51 @@
+// pipeline {
+//     agent { docker { image 'python:3.5.1' } }
+
+
+//     stages {
+      
+//         stage('build') {
+//             when{
+//                 changeset "**/vote/**"
+//             }
+//             steps {
+//                 echo 'Compiling vote app'
+//                 dir('vote'){
+//                     sh 'pip install -r requirements.txt'
+//                 }
+//             }
+//         }
+        
+//         stage('test') {
+//             when{
+//                 changeset "**/vote/**"
+                
+//             }
+//             steps {
+//                 echo 'Running Unit Tests on vote app'
+//                 dir('vote'){
+//                     sh 'nosetests -v'
+//                 }
+                
+//             }
+//         }
+//       }
+        
+//     post{
+//       always{
+        
+//         echo 'Job completed.'
+//       }
+//     }
+// }
+
 pipeline {
     agent { docker { image 'python:3.5.1' } }
-
-
     stages {
-      
         stage('build') {
-            when{
-                changeset "**/vote/**"
-            }
             steps {
-                echo 'Compiling vote app'
-                dir('vote'){
-                    sh 'pip install -r requirements.txt'
-                }
+                sh 'python --version'
             }
         }
-        
-        stage('test') {
-            when{
-                changeset "**/vote/**"
-                
-            }
-            steps {
-                echo 'Running Unit Tests on vote app'
-                dir('vote'){
-                    sh 'nosetests -v'
-                }
-                
-            }
-        }
-      }
-        
-    post{
-      always{
-        
-        echo 'Job completed.'
-      }
     }
 }
