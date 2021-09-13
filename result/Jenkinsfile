@@ -1,9 +1,8 @@
 pipeline {
-    agent any
-    
-    tools{
-        nodejs 'NodeJS 8.9.0'
+    agent {
+        docker: { image 'node:8.18.0-alpine'}
     }
+    
 
     stages {
       
@@ -52,7 +51,7 @@ pipeline {
     post{
       always{
         
-        echo 'Building multibranch pipeline for result is completed.'
+        echo 'Job completed.'
       }
     }
 }
