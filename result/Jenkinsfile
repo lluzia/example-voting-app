@@ -33,21 +33,21 @@ pipeline {
                 
             }
         }
-        stage('package') {
-            when{
-                branch 'master'
-                changeset "**/result/**"
-            }
-            steps {
-                echo 'Packaging result app'
-                dir('result'){
-                    sh 'mvn package -DskipTests'
-                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-                }
+    //     stage('package') {
+    //         when{
+    //             branch 'master'
+    //             changeset "**/result/**"
+    //         }
+    //         steps {
+    //             echo 'Packaging result app'
+    //             dir('result'){
+    //                 sh 'mvn package -DskipTests'
+    //                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+    //             }
                 
-            }
-        }
-      }
+    //         }
+    //     }
+    //   }
         
     post{
       always{
