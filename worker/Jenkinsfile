@@ -1,4 +1,5 @@
 pipeline {
+<<<<<<< HEAD
     agent {
         docker{
             image 'maven:3.6.1-jdk-8-slim'
@@ -7,10 +8,23 @@ pipeline {
     }
     
 
+=======
+    agent any
+    
+    tools{
+        maven 'maven 3.6.1'
+    }
+>>>>>>> feature/workerpipe
 
     stages {
       
         stage('build') {
+<<<<<<< HEAD
+=======
+            when{
+                changeset "**/worker/**"
+            }
+>>>>>>> feature/workerpipe
             steps {
                 echo 'Compiling worker app'
                 dir('worker'){
@@ -20,6 +34,13 @@ pipeline {
         }
         
         stage('test') {
+<<<<<<< HEAD
+=======
+            when{
+                changeset "**/worker/**"
+                
+            }
+>>>>>>> feature/workerpipe
             steps {
                 echo 'Running Unit Tests on worker app'
                 dir('worker'){
@@ -29,6 +50,13 @@ pipeline {
             }
         }
         stage('package') {
+<<<<<<< HEAD
+=======
+            when{
+                branch 'master'
+                changeset "**/worker/**"
+            }
+>>>>>>> feature/workerpipe
             steps {
                 echo 'Packaging worker app'
                 dir('worker'){
@@ -43,7 +71,11 @@ pipeline {
     post{
       always{
         
+<<<<<<< HEAD
         echo 'Job completed.'
+=======
+        echo 'Building multibranch pipeline for worker is completed.'
+>>>>>>> feature/workerpipe
       }
     }
 }
