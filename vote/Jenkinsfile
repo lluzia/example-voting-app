@@ -1,16 +1,22 @@
 pipeline {
-    agent { docker { image 'python:3.5.1' } }
-
+    agent none
 
     stages {
       
         stage('build') {
+          agent {
+              docker {
+                  image 'python:2-alpine'
+              }
+          }
+                    
             when{
                 changeset "**/vote/**"
             }
             steps {
                 echo 'Compiling vote app'
                 dir('vote'){
+                    sh 'python -m py_compile sources/add2vals.py sources/calc.py'
                     sh 'pip install --upgrade pip'
                     sh 'pip install -r requirements.txt'
                 }
@@ -18,6 +24,11 @@ pipeline {
         }
         
         stage('test') {
+          agent {
+              docker {
+                  image 'qnib/pytest'
+              }
+          }
             when{
                 changeset "**/vote/**"
                 
