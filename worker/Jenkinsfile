@@ -74,7 +74,7 @@ pipeline {
                   def workerImage = docker.build("luzia/worker:v${env.BUILD_ID}", "./worker")
                   workerImage.push()
                   workerImage.push("${env.BRANCH_NAME}")
-                  workerImage.push("latest")
+                //   workerImage.push("latest")
               }
             }
           }
