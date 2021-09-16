@@ -9,4 +9,4 @@ RUN mvn package && \
     rm -rf /app/* 
 
 
-CMD "java" "-jar" "/run/worker.jar" 
+CMD "java" "-jar" "/run/worker.jar"
