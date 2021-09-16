@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN mvn package && \ 
-    mv target/worker-jar-with-dependecies.jar /run/worker.jar && \
+    mv target/worker-jar-with-dependencies.jar /run/worker.jar && \
     rm -rf /app/* 
 
 
