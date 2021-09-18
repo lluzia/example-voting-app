@@ -3,10 +3,10 @@ pipeline {
   agent none
 
   stages{
-      stage("worker build"){
-        // when{
-        //     changeset "**/worker/**"
-        //   }
+      stage(worker build"){
+        when{
+            changeset "**/worker/**"
+          }
 
         agent{
           docker{
