@@ -99,7 +99,7 @@ pipeline {
           }
         }
       }
-      stage("test"){
+      stage("result-test"){
         // when{
         //   changeset "**/result/**"
         // }
@@ -118,26 +118,6 @@ pipeline {
 
           }
       }
-      // stage("package"){
-      //   when{
-      //     branch 'master'
-      //     changeset "**/result/**"
-      //   }
-      //   agent{
-      //     docker{
-      //       image 'node:8.16.0-alpine'
-      //       args '-v $HOME/.m2:/root/.m2'
-      //     }
-      //   }
-      //   steps{
-      //     echo 'Packaging result app'
-      //     dir('result'){
-      //       sh 'mvn package -DskipTests'
-      //       archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-      //     }
-      // 
-      //   }
-      // }
 
       stage('result-docker-package'){
           agent any
@@ -157,12 +137,71 @@ pipeline {
             }
           }
       }
+        stage("vote-build"){
+            // when{
+            //     changeset "**/vote/**"
+            //   }
+
+        agent{
+          docker{
+            image 'python:2.7.16-slim'
+            args '--user root'
+          }
+        }
+
+        steps{
+          echo 'Compiling vote app..'
+          dir('vote'){
+            sh 'pip install --upgrade pip'
+            sh 'pip install -r requirements.txt'
+          }
+        }
+      }
+      stage("vote-test"){
+        // when{
+        //   changeset "**/vote/**"
+        // }
+        agent{
+          docker{
+            image 'python:2.7.16-slim'
+            args '--user root'
+          }
+        }
+        steps{
+          echo 'Running Unit Tets on vote app..'
+          dir('vote'){
+            sh 'pip install --upgrade pip'
+            sh 'pip install -r requirements.txt'
+            sh 'nosetests -v'
+           }
+
+          }
+      }
+
+      stage('vote-docker-package'){
+          agent any
+        //   when{
+        //     changeset "**/vote/**"
+        //     branch 'master'
+        //   }
+          steps{
+            echo 'Packaging vote app with docker'
+            script{
+              docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
+                  def voteImage = docker.build("luzia/vote:v${env.BUILD_ID}", "./vote")
+                  voteImage.push()
+                  voteImage.push("${env.BRANCH_NAME}")
+                  voteImage.push("latest")
+              }
+            }
+          }
+      }
   
   }
 
   post{
     always{
-        echo 'Building multibranch pipeline for worker is completed..'
+        echo 'Consolidated Pipeline for instavote app.'
     }
   }
 }
