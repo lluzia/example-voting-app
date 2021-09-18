@@ -4,9 +4,9 @@ pipeline {
 
   stages{
       stage("worker-build"){
-        when{
-            changeset "**/worker/**"
-          }
+        // when{
+        //     changeset "**/worker/**"
+        //   }
 
         agent{
           docker{
@@ -41,10 +41,10 @@ pipeline {
           }
       }
       stage("worker-package"){
-        when{
-          branch 'master'
-          changeset "**/worker/**"
-        }
+        // when{
+        //   branch 'master'
+        //   changeset "**/worker/**"
+        // }
         agent{
           docker{
             image 'maven:3.6.1-jdk-8-alpine'
@@ -63,10 +63,10 @@ pipeline {
 
       stage('worker-docker-package'){
           agent any
-          when{
-            changeset "**/worker/**"
-            branch 'master'
-          }
+        //   when{
+        //     changeset "**/worker/**"
+        //     branch 'master'
+        //   }
           steps{
             echo 'Packaging worker app with docker'
             script{
