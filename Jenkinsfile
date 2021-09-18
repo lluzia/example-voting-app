@@ -79,7 +79,7 @@ pipeline {
             }
           }
       }
-        stages{
+    
       stage("result-build"){
         // when{
         //     changeset "**/result/**"
@@ -157,7 +157,7 @@ pipeline {
             }
           }
       }
-  }
+  
   }
 
   post{
