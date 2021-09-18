@@ -10,7 +10,7 @@ networks:
 services:
   vote:
     image: luzia/vote:latest
-    build: lu-demo-votting-app/vote
+    build: ./vote
     ports:
       - 5000:80
     depends_on:
