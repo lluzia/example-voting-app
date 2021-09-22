@@ -186,7 +186,7 @@ pipeline {
       //   branch 'master'
       // }
       tools {
-        {nodejs "node"} // the name you have given the JDK installation in Global Tool Configuration
+        nodejs "node" // the name you have given the JDK installation in Global Tool Configuration
       }
   
       environment{
