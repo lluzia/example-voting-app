@@ -180,37 +180,38 @@ pipeline {
       }
     }
     
-    stage('Sonarqube') {
-      agent any
-      // when{
-      //   branch 'master'
-      // }
-      tools {
-        nodejs "NodeJS 8.9.0" // the name you have given the JDK installation in Global Tool Configuration
-      }
+    // problemas com java version e jenkins
+    // stage('Sonarqube') {
+    //   agent any
+    //   // when{
+    //   //   branch 'master'
+    //   // }
+    //   tools {
+    //     nodejs "NodeJS 8.9.0" // the name you have given the JDK installation in Global Tool Configuration
+    //   }
   
-      environment{
-        sonarpath = tool 'SonarScanner'
-      }
+    //   environment{
+    //     sonarpath = tool 'SonarScanner'
+    //   }
   
-      steps {
-            echo 'Running Sonarqube Analysis..'
-            withSonarQubeEnv('sonar-instavote') {
-              sh "${sonarpath}/bin/sonar-scanner -Dproject.settings=sonar-project.properties -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400"
-            }
-      }
-    }
+    //   steps {
+    //         echo 'Running Sonarqube Analysis..'
+    //         withSonarQubeEnv('sonar-instavote') {
+    //           sh "${sonarpath}/bin/sonar-scanner -Dproject.settings=sonar-project.properties -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400"
+    //         }
+    //   }
+    // }
   
   
-    stage("Quality Gate") {
-        steps {
-            timeout(time: 1, unit: 'HOURS') {
-                // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                // true = set pipeline to UNSTABLE, false = don't
-                waitForQualityGate abortPipeline: true
-            }
-        }
-    }
+    // stage("Quality Gate") {
+    //     steps {
+    //         timeout(time: 1, unit: 'HOURS') {
+    //             // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+    //             // true = set pipeline to UNSTABLE, false = don't
+    //             waitForQualityGate abortPipeline: true
+    //         }
+    //     }
+    // }
 
   }
   post {
