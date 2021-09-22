@@ -186,19 +186,19 @@ pipeline {
       //   branch 'master'
       // }
       tools {
-        jdk "JDK11" // the name you have given the JDK installation in Global Tool Configuration
+        jdk "NodeJS 8.9.0" // the name you have given the JDK installation in Global Tool Configuration
       }
   
       environment{
         sonarpath = tool 'SonarScanner'
       }
   
-        steps {
-              echo 'Running Sonarqube Analysis..'
-              withSonarQubeEnv('sonar-instavote') {
-                sh "${sonarpath}/bin/sonar-scanner -Dproject.settings=sonar-project.properties -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400"
-              }
-        }
+      steps {
+            echo 'Running Sonarqube Analysis..'
+            withSonarQubeEnv('sonar-instavote') {
+              sh "${sonarpath}/bin/sonar-scanner -Dproject.settings=sonar-project.properties -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400"
+            }
+      }
     }
   
   
